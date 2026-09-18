@@ -1,0 +1,25 @@
+Transcript Download
+--------------------
+Just change the month's dates below. Example — August 2026:
+
+Why these times: 1 Aug 00:00:00 IST = 31 Jul 18:30:00 UTC, and
+31 Aug 23:59:59.999 IST = 31 Aug 18:29:59.999 UTC. Using this instead of a
+naive 2026-08-01T00:00:00.000Z to 2026-08-31T23:59:59.000Z avoids clipping
+the last ~5.5 hours of July 31 evening (IST) sessions off the front, and
+avoids pulling in the first ~5.5 hours of September 1 (IST) sessions at
+the back.
+
+cd "/Users/srathod/Desktop/Script"
+python3 egain_transcript_downloader.py \
+    --start 2026-07-31T18:30:00.000Z \
+    --end   2026-08-31T18:29:59.999Z \
+    --out   ./transcripts_august \
+    --token-file token.txt \
+    --workers 5
+
+Combine Script
+--------------------
+cd "/Users/srathod/Desktop/Script"
+python3 "Combine transcript/combine_transcripts.py" \
+    --dir ./transcripts_august \
+    --out ./transcripts_august/transcripts_august_combined.xlsx
